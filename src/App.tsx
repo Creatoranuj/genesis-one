@@ -60,7 +60,14 @@ const AdminChatbotSettings = lazy(() => import("./pages/AdminChatbotSettings"));
 const AdminAnalytics = lazy(() => import("./pages/AdminAnalytics"));
 const Downloads = lazy(() => import("./pages/Downloads"));
 const Doubts = lazy(() => import("./pages/Doubts"));
-import ChatWidget from "./components/chat/ChatWidget";
+const ChatWidget = lazy(() => import("./components/chat/ChatWidget"));
+
+const DashboardChatWidget = () => {
+  const location = useLocation();
+  const show = location.pathname === "/" || location.pathname === "/dashboard";
+  if (!show) return null;
+  return <Suspense fallback={null}><ChatWidget /></Suspense>;
+};
 
 // Optimized QueryClient with better caching
 const queryClient = new QueryClient({
