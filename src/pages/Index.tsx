@@ -13,6 +13,7 @@ import Testimonials from "@/components/Landing/Testimonials";
 import LeadForm from "@/components/Landing/LeadForm";
 import GraduationBanner from "@/components/Landing/GraduationBanner";
 import Footer from "@/components/Landing/Footer";
+import InstallAppBanner from "@/components/Landing/InstallAppBanner";
 import { Button } from "@/components/ui/button";
 import {
   Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger,
@@ -127,6 +128,7 @@ const Index = () => {
         <OnlineLearning />
         <StudyMaterials />
         <Testimonials />
+        <InstallAppBanner />
         <LeadForm />
         <GraduationBanner />
       </main>

@@ -25,7 +25,7 @@ import { toast } from "sonner";
 // ─── UPDATE THIS URL with your GitHub Releases APK link ──────────────────────
 // Format: "https://github.com/YOUR_USER/YOUR_REPO/releases/latest/download/SadguruCoachingClasses.apk"
 // Admin: paste your GitHub releases URL here once available
-const APK_DOWNLOAD_URL = "https://github.com/naveen-bharatprism/sadguru-coaching-classes/releases/latest/download/SadguruCoachingClasses.apk";
+const APK_DOWNLOAD_URL = "https://github.com/Creatoranuj/sadguruclasses/releases/download/v1.0-20260309-0510/app-debug.apk";
 // ─────────────────────────────────────────────────────────────────────────────
 
 type Platform = "android" | "ios" | "desktop";
@@ -83,8 +83,8 @@ const Install = () => {
   const [copiedApk, setCopiedApk] = useState(false);
   const navigate = useNavigate();
   const appUrl = window.location.origin;
-  const qrUrl = `https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=${encodeURIComponent(`${appUrl}/install`)}&choe=UTF-8`;
-  const apkQrUrl = `https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=${encodeURIComponent(APK_DOWNLOAD_URL)}&choe=UTF-8`;
+  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(`${appUrl}/install`)}`;
+  const apkQrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(APK_DOWNLOAD_URL)}`;
 
   useEffect(() => {
     setPlatform(detectPlatform());
