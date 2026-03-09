@@ -1,83 +1,48 @@
 
-## Root Cause: Missing `lovable.toml`
 
-The build error "no package.json found" and "no command found for task dev" is caused by a missing `lovable.toml` file. The project has `package.json` with `dev: "vite"` and `vite.config.ts` serving on port 5000 — all correct. Lovable's build system requires a `lovable.toml` to wire the dev command. This is the **critical fix** that restores the preview.
+# Fix Plan: Form Errors, Dialog Warning, Chatbot Restriction & Build
 
----
+## 1. Recreate `.env` file
+The `.env` file was deleted, which may be causing the build error. Recreate it with the Supabase credentials (already hardcoded in `client.ts`, but other parts of the code reference `import.meta.env`).
 
-## Plan
+## 2. Add `name` and `autocomplete` attributes to form inputs
 
-### 1. Create `lovable.toml` (Critical - fixes blank preview)
+**Login.tsx (lines 157, 166):**
+- Email input: add `name="email"` and `autocomplete="email"`
+- Password input: add `name="password"` and `autocomplete="current-password"`
 
-```toml
-[run]
-dev = "npm run dev"
-```
+**Signup.tsx (lines 155, 160, 166-172, 200):**
+- Name input: add `name="name"` and `autocomplete="name"`
+- Email input: add `name="email"` and `autocomplete="email"`
+- Password input: add `name="new-password"` and `autocomplete="new-password"`
+- Confirm password input: add `name="confirmPassword"` and `autocomplete="new-password"`
 
-This tells Lovable's runner to use `npm run dev` (which invokes `vite` on port 5000).
+**AdminLogin.tsx (lines 135, 141):**
+- Email input: add `name="email"` and `autocomplete="email"`
+- Password input: add `name="password"` and `autocomplete="current-password"`
 
----
+**ForgotPassword.tsx:**
+- Email input: add `name="email"` and `autocomplete="email"`
 
-### 2. Visual Polish — CSS & Theme Improvements
+**LeadForm.tsx:**
+- Student name input: add `name="studentName"` and `autocomplete="name"`
+- Email input: add `name="email"` and `autocomplete="email"`
 
-Update `src/index.css` to add:
-- Smooth card hover transitions (lift + shadow)
-- Consistent button focus rings
-- Course card polish (uniform border, shadow, hover transform)
-- Better form input focus styles
+## 3. Fix DialogContent `aria-describedby` warning
 
-Update `src/pages/Index.tsx` branding:
-- The nav still shows "Sadguru Coaching Classes" — update text to match current brand direction
-- Hero title already uses `data?.title` which is dynamic, so it's fine
+In `src/components/ui/dialog.tsx`, add a default `aria-describedby={undefined}` to suppress the Radix warning when no description is provided. This is the standard fix.
 
----
+## 4. Restrict ChatWidget to dashboard only
 
-### 3. Landing Page & Navigation Visual Fixes
+In `src/App.tsx` (line 196), replace `<ChatWidget />` with a wrapper component that uses `useLocation()` and only renders the chatbot on `/dashboard` and `/` routes.
 
-In `src/pages/Index.tsx`:
-- The nav logo `alt` text and brand name span say "Sadguru Coaching Classes" — update to match
-- Add a subtle gradient shadow under the sticky nav for depth
-- Ensure mobile Sheet menu has proper styling
+## Files to modify
+- `.env` (create)
+- `src/pages/Login.tsx`
+- `src/pages/Signup.tsx`
+- `src/pages/AdminLogin.tsx`
+- `src/pages/ForgotPassword.tsx`
+- `src/components/Landing/LeadForm.tsx`
+- `src/components/ui/dialog.tsx`
+- `src/App.tsx`
 
----
-
-### 4. Global Component Polish in `src/index.css`
-
-Add utility classes:
-- `.card-hover` — `transition-all duration-200 hover:-translate-y-1 hover:shadow-lg`
-- `.btn-primary` — consistent gradient button style
-- Improve the progress thumb hit area on mobile (larger touch target)
-- Ensure consistent border-radius across cards
-
----
-
-### 5. Branding Consistency
-
-In `src/components/video/MahimaGhostPlayer.tsx`:
-- The watermark text currently references "Mahima Academy" (updated in prior session) — verify and keep
-- The `sadguru_player_volume` localStorage key should stay (internal, not visible to user)
-
-In `src/pages/AdminUpload.tsx`:
-- `watermarkText` default is "Sadguru Coaching Classes" — keep consistent with platform branding
-
----
-
-## Files to Modify
-
-| File | Change |
-|------|--------|
-| `lovable.toml` | **Create** — add `[run] dev = "npm run dev"` |
-| `src/index.css` | Add card hover, button, form, and progress bar visual improvements |
-| `src/pages/Index.tsx` | Minor nav branding text update |
-
-## Files NOT Changed
-- `MahimaGhostPlayer.tsx` — video player watermark/timing logic untouched
-- `LessonView.tsx` — progress tracking logic untouched
-- `AdminUpload.tsx` — MIME validation untouched
-- All Supabase integration files — untouched
-
----
-
-## Note on Visual Editor
-
-The prompt asks to use Lovable's Visual Editor mode. However, Visual Editor is a frontend browser tool for the user to use interactively — it cannot be operated by the AI programmatically. The AI makes CSS/code changes directly which achieves the same result. The improvements above are implemented through code, which is equivalent to (and more reliable than) manual Visual Editor use.
