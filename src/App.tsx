@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { AuthProvider, useAuth } from "@/contexts/AuthContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { BatchProvider } from "@/contexts/BatchContext";
@@ -60,7 +60,14 @@ const AdminChatbotSettings = lazy(() => import("./pages/AdminChatbotSettings"));
 const AdminAnalytics = lazy(() => import("./pages/AdminAnalytics"));
 const Downloads = lazy(() => import("./pages/Downloads"));
 const Doubts = lazy(() => import("./pages/Doubts"));
-import ChatWidget from "./components/chat/ChatWidget";
+const ChatWidget = lazy(() => import("./components/chat/ChatWidget"));
+
+const DashboardChatWidget = () => {
+  const location = useLocation();
+  const show = location.pathname === "/" || location.pathname === "/dashboard";
+  if (!show) return null;
+  return <Suspense fallback={null}><ChatWidget /></Suspense>;
+};
 
 // Optimized QueryClient with better caching
 const queryClient = new QueryClient({
@@ -193,7 +200,7 @@ const App = () => (
                    <Route path="*" element={<NotFound />} />
                 </Routes>
               </Suspense>
-              <ChatWidget />
+              <DashboardChatWidget />
             </BrowserRouter>
           </TooltipProvider>
         </BatchProvider>
