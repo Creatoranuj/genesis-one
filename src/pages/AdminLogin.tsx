@@ -132,7 +132,7 @@ const AdminLogin = () => {
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="space-y-2">
                 <Label htmlFor="email" className="text-white">Admin Email</Label>
-                <Input id="email" type="email" placeholder="admin@sadguru.edu" value={email} onChange={(e) => setEmail(e.target.value)} className="bg-white/10 border-white/20 text-white placeholder:text-white/50 h-12" />
+                <Input id="email" name="email" autoComplete="email" type="email" placeholder="admin@sadguru.edu" value={email} onChange={(e) => setEmail(e.target.value)} className="bg-white/10 border-white/20 text-white placeholder:text-white/50 h-12" />
               </div>
 
               <div className="space-y-2">
