@@ -25,7 +25,7 @@ import { toast } from "sonner";
 // ─── UPDATE THIS URL with your GitHub Releases APK link ──────────────────────
 // Format: "https://github.com/YOUR_USER/YOUR_REPO/releases/latest/download/SadguruCoachingClasses.apk"
 // Admin: paste your GitHub releases URL here once available
-const APK_DOWNLOAD_URL = "https://github.com/naveen-bharatprism/sadguru-coaching-classes/releases/latest/download/SadguruCoachingClasses.apk";
+const APK_DOWNLOAD_URL = "https://github.com/Creatoranuj/sadguruclasses/releases/download/v1.0-20260309-0510/app-debug.apk";
 // ─────────────────────────────────────────────────────────────────────────────
 
 type Platform = "android" | "ios" | "desktop";
