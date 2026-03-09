@@ -128,6 +128,7 @@ const Index = () => {
         <OnlineLearning />
         <StudyMaterials />
         <Testimonials />
+        <InstallAppBanner />
         <LeadForm />
         <GraduationBanner />
       </main>

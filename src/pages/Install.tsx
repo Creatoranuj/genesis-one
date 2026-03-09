@@ -83,8 +83,8 @@ const Install = () => {
   const [copiedApk, setCopiedApk] = useState(false);
   const navigate = useNavigate();
   const appUrl = window.location.origin;
-  const qrUrl = `https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=${encodeURIComponent(`${appUrl}/install`)}&choe=UTF-8`;
-  const apkQrUrl = `https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=${encodeURIComponent(APK_DOWNLOAD_URL)}&choe=UTF-8`;
+  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(`${appUrl}/install`)}`;
+  const apkQrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(APK_DOWNLOAD_URL)}`;
 
   useEffect(() => {
     setPlatform(detectPlatform());
