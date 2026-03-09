@@ -165,6 +165,8 @@ const Signup = () => {
               <div className="relative">
                 <Input
                   id="password"
+                  name="new-password"
+                  autoComplete="new-password"
                   type={showPassword ? "text" : "password"}
                   placeholder="Create a password (min 6 characters)"
                   value={password}
