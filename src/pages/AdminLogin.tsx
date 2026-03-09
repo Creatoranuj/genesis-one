@@ -138,7 +138,7 @@ const AdminLogin = () => {
               <div className="space-y-2">
                 <Label htmlFor="password" className="text-white">Password</Label>
                 <div className="relative">
-                  <Input id="password" type={showPassword ? "text" : "password"} placeholder="••••••••" value={password} onChange={(e) => setPassword(e.target.value)} className="bg-white/10 border-white/20 text-white placeholder:text-white/50 h-12 pr-12" />
+                  <Input id="password" name="password" autoComplete="current-password" type={showPassword ? "text" : "password"} placeholder="••••••••" value={password} onChange={(e) => setPassword(e.target.value)} className="bg-white/10 border-white/20 text-white placeholder:text-white/50 h-12 pr-12" />
                   <Button type="button" variant="ghost" size="icon" className="absolute right-1 top-1/2 -translate-y-1/2 text-white/60 hover:text-white hover:bg-white/10" onClick={() => setShowPassword(!showPassword)}>
                     {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                   </Button>

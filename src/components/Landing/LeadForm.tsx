@@ -79,12 +79,16 @@ const LeadForm = memo(() => {
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <Input
+                name="studentName"
+                autoComplete="name"
                 placeholder="Student's Name"
                 value={formData.studentName}
                 onChange={(e) => handleInputChange("studentName", e.target.value)}
                 className="h-12"
               />
               <Input
+                name="email"
+                autoComplete="email"
                 type="email"
                 placeholder="Email"
                 value={formData.email}

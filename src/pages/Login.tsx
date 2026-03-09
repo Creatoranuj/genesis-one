@@ -163,7 +163,7 @@ const Login = () => {
                 <Link to="/forgot-password" className="text-sm text-primary hover:underline">Forgot password?</Link>
               </div>
               <div className="relative">
-                <Input id="password" type={showPassword ? "text" : "password"} placeholder="••••••••" value={password} onChange={(e) => { setPassword(e.target.value); setErrorMessage(null); }} className="bg-background border-border h-12 pr-12" />
+                <Input id="password" name="password" autoComplete="current-password" type={showPassword ? "text" : "password"} placeholder="••••••••" value={password} onChange={(e) => { setPassword(e.target.value); setErrorMessage(null); }} className="bg-background border-border h-12 pr-12" />
                 <Button type="button" variant="ghost" size="icon" className="absolute right-1 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground" onClick={() => setShowPassword(!showPassword)}>
                   {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                 </Button>

@@ -199,7 +199,7 @@ const Signup = () => {
 
             <div className="space-y-2">
               <Label htmlFor="confirmPassword">Confirm Password</Label>
-              <Input id="confirmPassword" type={showPassword ? "text" : "password"} placeholder="Confirm your password" value={confirmPassword} onChange={(e) => { setConfirmPassword(e.target.value); setErrorMessage(null); }} className="bg-background border-border h-12" />
+              <Input id="confirmPassword" name="confirmPassword" autoComplete="new-password" type={showPassword ? "text" : "password"} placeholder="Confirm your password" value={confirmPassword} onChange={(e) => { setConfirmPassword(e.target.value); setErrorMessage(null); }} className="bg-background border-border h-12" />
             </div>
 
             <Button type="submit" className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground gap-2" disabled={isLoading}>
